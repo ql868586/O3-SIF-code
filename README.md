@@ -15,7 +15,7 @@ The raw datasets used in this study are publicly available from the following so
 - **Meteorological Data**: ERA5-Land monthly means, available from the Copernicus Climate Data Store at https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land-monthly-means?tab=overview
 - **Land Cover Data**: ESA CCI Land Cover, available from the ESA CCI Land Cover archive at https://maps.elie.ucl.ac.be/CCI/viewer/download.php
 
-**Note on Processed Data**: The fully processed and merged intermediate dataset (the direct input for the DML models) is approximately 35.6 GB. Due to its large size, it is not hosted in this GitHub repository. It has been deposited in the Zenodo repository and is publicly available at [https://doi.org/10.5281/zenodo.XXXXXXX].
+**Note on Processed Data**:The fully processed and merged intermediate dataset (the direct input for the DML models) is approximately 35.6 GB. Due to its large size, it is not hosted in this GitHub repository. It has been deposited in the Zenodo repository and is publicly available at https://doi.org/10.5281/zenodo.23520196.
 
 ## Code Structure
 

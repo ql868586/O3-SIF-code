@@ -18,10 +18,38 @@ The raw datasets used in this study are publicly available from the following so
 **Note on Processed Data**: The fully processed and merged intermediate dataset (the direct input for the DML models) is approximately 35.6 GB. It is not hosted in this GitHub repository due to its large size. It is available from the corresponding author upon reasonable request for peer review.
 
 ## Code Structure
-- `dml_reviewer_compact_v6_1_full_data.py`: Main script for DML model training and baseline analysis.
-- `o3_sif_spatial_heterogeneity_plus_climate_modifier_v7_full.py`: Script for spatial heterogeneity and climate modifier analysis.
-- `LCCS_DML_v3_aligned_with_main.py`: Robustness check using LCCS variables, aligned with the main analysis pipeline.
-- `monthly_o3_sif_dml_v2_main_aligned.py`: Robustness check using monthly aggregated data, aligned with the main analysis pipeline.
+
+The repository is organized into five modules that follow the analysis workflow: data harmonization, double machine learning (DML) estimation, hyperparameter tuning, heterogeneity analysis, and trend analysis.
+
+### Data and Preprocessing
+
+- `data/` : Root directory for the raw and harmonized datasets (NetCDF, GeoTIFF and CSV); large data files are excluded from version control. **The fully processed intermediate dataset is available in the Zenodo repository (DOI: 10.5281/zenodo.XXXXXXX).**
+- `data/spatial-data-match.py` : Constructs the 1 km Albers equal-area grid over China and extracts raster covariates to grid cells using `exactextract`.
+- `data/spatiotemporal_match.py` : Aligns SIF, meteorological, LCCS, ozone and DEM layers to a common 0.05° grid by year–month and exports the analysis-ready pixel-level CSV.
+
+### Model Training (Double Machine Learning)
+
+- `dml/` : Double machine learning module for the main O3–SIF estimation.
+- `dml/dml.py` : Core DML script estimating the O3 effect on SIF with Model A/B/C control sets, five-fold spatial and temporal cross-fitting, cluster-robust inference, wild bootstrap, and the EXP09 specification-calibration experiment.
+
+### Hyperparameter Tuning
+
+- `Hyperparameter/` : Nested tuning of the XGBoost nuisance models.
+- `Hyperparameter/o3_sif_nested_blocked_hyperopt.py` : Performs nested, spatially blocked hyperparameter optimization for the treatment and outcome models and exports the frozen parameter set used by all DML runs.
+
+### Heterogeneity Analysis
+
+- `month/` : Seasonal (calendar-month) heterogeneity analysis.
+- `month/o3_sif_monthly_heterogeneity_dml.py` : Month-specific DML estimation of the O3–SIF relationship, with month-by-year heatmaps, pooled forest plots and formal heterogeneity tests.
+- `lccs/` : Land-cover heterogeneity analysis.
+- `lccs/o3_sif_lccs_heterogeneity_dml.py` : Land-cover (LCCS)-stratified DML estimation comparing the O3–SIF relationship across vegetation classes, including threshold sensitivity and group-level forest plots.
+- `spatial heterogeneity/` : Spatially explicit heterogeneity analysis.
+- `spatial heterogeneity/o3_sif_spatial_heterogeneity_dml.py` : Pixel-resolved DML analysis with an SSRD radiation modifier, DuckDB-backed caching and bootstrap inference to characterize spatial heterogeneity in the O3–SIF relationship.
+
+### Trend Analysis and Visualization
+
+- `trend/` : Temporal trend analysis and figure generation.
+- `trend/trend.py` : Computes pixel-level Sen's slope and modified Mann–Kendall trends for SIF and O3 with BH/BY FDR correction, and renders the manuscript maps (Figures 4–5).
 
 ## License
 This project is licensed under the MIT License.

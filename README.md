@@ -23,7 +23,7 @@ The repository is organized into five modules that follow the analysis workflow:
 
 ### Data and Preprocessing
 
-- `data/` : Root directory for the raw and harmonized datasets (NetCDF, GeoTIFF and CSV); large data files are excluded from version control. **The fully processed intermediate dataset is available in the Zenodo repository (DOI: 10.5281/zenodo.XXXXXXX).**
+- `data/` : Root directory for the raw and harmonized datasets (NetCDF, GeoTIFF and CSV); large data files are excluded from version control. **The fully processed intermediate dataset is available in the Zenodo repository.**
 - `data/spatial-data-match.py` : Constructs the 1 km Albers equal-area grid over China and extracts raster covariates to grid cells using `exactextract`.
 - `data/spatiotemporal_match.py` : Aligns SIF, meteorological, LCCS, ozone and DEM layers to a common 0.05° grid by year–month and exports the analysis-ready pixel-level CSV.
 

@@ -24,7 +24,7 @@ The repository is organized into five modules that follow the analysis workflow:
 ### Data and Preprocessing
 
 - `data/` : Root directory for the raw and harmonized datasets (NetCDF, GeoTIFF and CSV); large data files are excluded from version control. **The fully processed intermediate dataset is available in the Zenodo repository.**
-- `data/spatial-data-match.py` : Constructs the 1 km Albers equal-area grid over China and extracts raster covariates to grid cells using `exactextract`.
+* **`data/sif_average.py`** : Computes the annual and monthly average of the OCO-2 SIF dataset (`clear_daily_SIF`). It masks out negative values (missing data), clips the raster to the China boundary (provided as a shapefile), and exports the aggregated results as GeoTIFF files.
 - `data/spatiotemporal_match.py` : Aligns SIF, meteorological, LCCS, ozone and DEM layers to a common 0.05° grid by year–month and exports the analysis-ready pixel-level CSV.
 
 ### Model Training (Double Machine Learning)
